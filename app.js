@@ -10,7 +10,7 @@ let sum = document.querySelector('#sum')
 let mul = document.querySelector('#mul')
 let percentage = document.querySelector('#percentage')
 let difference = document.querySelector('#difference')
-
+let buttons  = document.querySelectorAll('button')
 
 numbers.forEach((Btn) => {
    Btn.addEventListener('click', (e) => {
@@ -19,11 +19,12 @@ numbers.forEach((Btn) => {
       console.log(display.value);
    });
 });
+console.log(display.value)
+function onDel(){
+  display.value = display.value.slice(0,-1)
+}
 
-del.addEventListener('click',()=>{  
-   display.value = display.value.slice(0,-1)
-      
-})
+del.addEventListener('click',onDel)
 
 ac.addEventListener('click',()=>{
    display.value = ""
@@ -40,7 +41,32 @@ operators.forEach((operator)=>{
 })
 
 ans.addEventListener('click',()=>{
-   
+   display.value = result()
 })
+
+   document.addEventListener('keydown',(e)=>{
+      console.log(e.key);
+      let key = e.key
+      if((key>=0 && key<=9) || key === "+" || key === "-" || key === "*" || key === "/"){      
+        display.value += key
+      }else if(key === "Backspace"){
+        onDel()  
+      }else if(key === "Shift"){
+         display.value = ""
+      }else if(key === "Enter"){
+         e.preventDefault()
+         display.value = result()               
+      }     
+   })   
+
+function result(){  
+   
+     try{
+       display.value = eval()  
+     }catch{
+      display.value = "Invalid"
+     }
+}
+
 
   
