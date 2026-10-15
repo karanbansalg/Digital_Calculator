@@ -62,7 +62,8 @@ ans.addEventListener('click',()=>{
 function result(){  
    
      try{
-       display.value = eval()  
+       display.value = eval(display.value) 
+       return display.value; 
      }catch{
       display.value = "Invalid"
      }
